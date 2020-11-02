@@ -46,20 +46,23 @@ namespace Tietokantatesti2
         }
 
     }
+    
+    // Pääohjelma
     class Program
     {
                static void Main(string[] args)
         {
             // Muodostetaan yheys tietokantaan
-             
-            using (SqlConnection sqlConnection = new SqlConnection("Data Source=sql1.testaus.intra; Initial Catalog=Käyttäjätiedot; Integrated Security=True"))
+             using (SqlConnection sqlConnection = new SqlConnection("Data Source=sql1.testaus.intra; Initial Catalog=Käyttäjätiedot; Integrated Security=True"))
             {
                 // Avataan yhteys SQL-palvelimeen
                 sqlConnection.Open();
+                 
                 // Määritellään suoritettava SQL-komento
                 SqlCommand sqlCommand = new SqlCommand("SELECT KayttajaID, Kayttajatunnus FROM dbo.Kayttaja", sqlConnection);
                 // Aikakatkaistaan, jos vastausta ei saada 30 sek. sisällä
                 sqlCommand.CommandTimeout = 30;
+                 
                 // Suoritetaan komento lukijassa
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
                 
@@ -81,16 +84,19 @@ namespace Tietokantatesti2
                 SqlDataReader sqlDataReader1 = sqlCommand1.ExecuteReader();
                 
                 // While-silmukka: varaudutaan useampaan tietueeseen tulosjoukossa
-                while(sqlDataReader1.Read())
+               
+                 // TODO: poista tarpeeton silmukka
+                 while(sqlDataReader1.Read())
                 {
                     user.systemUserName = sqlDataReader1.GetString(0);
                 }
+                 
+                 // Suljetaan lukija
                 sqlDataReader1.Close();
 
                 Console.WriteLine("Käyttäjätunnuos on " + user.systemUserName);
 
                 // Kutsutaan OmatTyot-proseduuria
-
                 // Luodaan SQL-komento-olio proseduurin suoritusta varten
                 SqlCommand sqlCommand2 = new SqlCommand("dbo.OmatTyot", sqlConnection) ;
                 sqlCommand2.CommandType = CommandType.StoredProcedure;
@@ -106,6 +112,7 @@ namespace Tietokantatesti2
 
                 sqlDataReader2.Close();
                 Console.ReadLine();
+                 
                 // Suljetaan yhteys palvelimeen
                 sqlConnection.Close();
             }
