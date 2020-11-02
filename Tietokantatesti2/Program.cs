@@ -9,6 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Tietokantatesti2
 {
+    // Luokka käyttäjätietojen tallentamista varten
     class User
     {
         public Int32 userId;
@@ -16,7 +17,7 @@ namespace Tietokantatesti2
         public string lastName;
         public string systemUserName;
 
-        // Konstuktori
+        // Oletusmuodostin
         public User()
         {
             this.userId = 0;
@@ -27,13 +28,15 @@ namespace Tietokantatesti2
         }
     }
 
+    // Luokka töiden kirjaustietoja varten
     class Entry
     {
         public Int32 entryId;
         public Int32 userId2;
         public DateTime DateTime;
         public string explanation;
-
+        
+        // Oletusmuodostin
         Entry()
         {
             this.entryId = 0;
@@ -59,24 +62,27 @@ namespace Tietokantatesti2
                 sqlCommand.CommandTimeout = 30;
                 // Suoritetaan komento lukijassa
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+                
                 // Tulostetaan ruudulle sitä mukaa, kun dataa tulee
                 while(sqlDataReader.Read())
                 {
                     Console.WriteLine("{0}\t{1}", sqlDataReader.GetInt32(0), sqlDataReader.GetString(1));
                 }
+                
                 // Suljetaan lukija
                 sqlDataReader.Close();
-
-                User user = new User();
-                // Kutustaan SUSER_NAME järjestelmäfuntiota ja tallennetaan tulos muuttujaan
                 
+                // Luodaan olio käyttäjätietojen tallentamiseksi
+                User user = new User();
+                
+                // Kutustaan SUSER_NAME järjestelmäfuntiota ja tallennetaan tulos muuttujaan
                 SqlCommand sqlCommand1 = new SqlCommand("SELECT SUSER_NAME()", sqlConnection);
                 sqlCommand1.CommandTimeout = 1;
                 SqlDataReader sqlDataReader1 = sqlCommand1.ExecuteReader();
                 
+                // While-silmukka: varaudutaan useampaan tietueeseen tulosjoukossa
                 while(sqlDataReader1.Read())
                 {
-                    
                     user.systemUserName = sqlDataReader1.GetString(0);
                 }
                 sqlDataReader1.Close();
@@ -85,7 +91,7 @@ namespace Tietokantatesti2
 
                 // Kutsutaan OmatTyot-proseduuria
 
-                // Luodaan komento-olio proseduuria varten
+                // Luodaan SQL-komento-olio proseduurin suoritusta varten
                 SqlCommand sqlCommand2 = new SqlCommand("dbo.OmatTyot", sqlConnection) ;
                 sqlCommand2.CommandType = CommandType.StoredProcedure;
                 sqlCommand2.Parameters.Add("@kayttaja", SqlDbType.NVarChar).Value = user.systemUserName;
