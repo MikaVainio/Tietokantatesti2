@@ -5,14 +5,50 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Tietokantatesti2
 {
+    class User
+    {
+        public Int32 userId;
+        public string firstName;
+        public string lastName;
+        public string systemUserName;
+
+        // Konstuktori
+        public User()
+        {
+            this.userId = 0;
+            this.firstName = "N/A";
+            this.lastName = "N/A";
+            this.systemUserName ="N/A";
+
+        }
+    }
+
+    class Entry
+    {
+        public Int32 entryId;
+        public Int32 userId2;
+        public DateTime DateTime;
+        public string explanation;
+
+        Entry()
+        {
+            this.entryId = 0;
+            this.userId2 = 0;
+            this.DateTime = DateTime.Parse("1.1.2020");
+            this.explanation = "N/A";
+        }
+
+    }
     class Program
     {
-        static void Main(string[] args)
+               static void Main(string[] args)
         {
             // Muodostetaan yheys tietokantaan
+             
             using (SqlConnection sqlConnection = new SqlConnection("Data Source=sql1.testaus.intra; Initial Catalog=Käyttäjätiedot; Integrated Security=True"))
             {
                 // Avataan yhteys SQL-palvelimeen
@@ -29,18 +65,40 @@ namespace Tietokantatesti2
                     Console.WriteLine("{0}\t{1}", sqlDataReader.GetInt32(0), sqlDataReader.GetString(1));
                 }
                 // Suljetaan lukija
-                sqlDataReader.Close();              
+                sqlDataReader.Close();
+
+                User user = new User();
                 // Kutustaan SUSER_NAME järjestelmäfuntiota ja tallennetaan tulos muuttujaan
+                
                 SqlCommand sqlCommand1 = new SqlCommand("SELECT SUSER_NAME()", sqlConnection);
                 sqlCommand1.CommandTimeout = 1;
                 SqlDataReader sqlDataReader1 = sqlCommand1.ExecuteReader();
+                
                 while(sqlDataReader1.Read())
                 {
-                    Console.WriteLine(sqlDataReader1.GetString(0));
+                    
+                    user.systemUserName = sqlDataReader1.GetString(0);
                 }
                 sqlDataReader1.Close();
 
+                Console.WriteLine("Käyttäjätunnuos on " + user.systemUserName);
 
+                // Kutsutaan OmatTyot-proseduuria
+
+                // Luodaan komento-olio proseduuria varten
+                SqlCommand sqlCommand2 = new SqlCommand("dbo.OmatTyot", sqlConnection) ;
+                sqlCommand2.CommandType = CommandType.StoredProcedure;
+                sqlCommand2.Parameters.Add("@kayttaja", SqlDbType.NVarChar).Value = user.systemUserName;
+
+                // Luodaan lukija proseduurin tulosjoukkoa varten
+                SqlDataReader sqlDataReader2 = sqlCommand2.ExecuteReader();
+
+                while(sqlDataReader2.Read())
+                {
+                    Console.WriteLine("{0}\t{1}\t{2}\t{3}", sqlDataReader2.GetString(0), sqlDataReader2.GetString(1), sqlDataReader2.GetDateTime(2).ToString("yyy.MM.dd"), sqlDataReader2.GetString(3));
+                }
+
+                sqlDataReader2.Close();
                 Console.ReadLine();
                 // Suljetaan yhteys palvelimeen
                 sqlConnection.Close();
