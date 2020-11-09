@@ -8,15 +8,16 @@ Eli Rakennusliikkeellä on monta työmaata, työmaalle tehdään monta tarkastus
 Tehtäväsi on luoda tietokanta, johon tarkastustiedot tallennetaan. Luo taulut ja käsitemalli.
 
 ## Harjoitus 2
+Rakenna Access-prototyyppi, jonka avulla voidaan suunnitella ja kehittää lopullisen sovelluksen käyttöliittymää sekä syöttää tietokannan testauksessa tarvittavia tietoja.
+
+
+## Harjoitus 3
 Rakenna edellisen harjoituksen tietokantaan näkymät:
 1. Tarkastukset rakennusliikeittäin (Liike, työmaa, tyyppi, tekijä, päivä)
 2. Omat tarkastukset (Työmaa, tyyppi, päivä)
 3. Laskutus kuukausittain (Kuukausi, liike, tyyppi, tarkastuskertoja)
 
-## Harjoitus 3
+## Harjoitus 4
 Luo proseduuri ja C#-koodi seuraaviin tarkoituksiin
 1. Lisätään tarkastuskäynti
 2. Katsotaan omat tarkastuskäynnit
-
-## Harjoitus 4
-Rakenna Access-prototyyppi, jonka avulla voidaan suunnitella ja kehittää lopullisen sovelluksen käyttöliittymää sekä syöttää tietokannan testauksessa tarvittavia tietoja.
