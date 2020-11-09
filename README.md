@@ -17,3 +17,6 @@ Rakenna edellisen harjoituksen tietokantaan näkymät:
 Luo proseduuri ja C#-koodi seuraaviin tarkoituksiin
 1. Lisätään tarkastuskäynti
 2. Katsotaan omat tarkastuskäynnit
+
+## Harjoitus 4
+Rakenna Access-prototyyppi, jonka avulla voidaan suunnitella ja kehittää lopullisen sovelluksen käyttöliittymää sekä syöttää tietokannan testauksessa tarvittavia tietoja.
