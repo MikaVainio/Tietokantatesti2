@@ -4,7 +4,7 @@
 USE Joukkooppi
 GO
 
--- Lisätään Eläkeläinen2020-tauluun uusia tietueita (henkilöt joide id on 5 ja 6)
+-- Lisätään Eläkeläinen2020-tauluun uusia tietueita (henkilöt joiden id:t  ovat 5 ja 6)
 INSERT dbo.Eläkeläinen2020 (HenkilöID, Etunimi, Sukunimi)
 -- Valitaan siirrettävä tiettue
 (SELECT dbo.Työntekijä2020.HenkilöID, dbo.Työntekijä2020.Etunimi, dbo.Työntekijä2020.Sukunimi
