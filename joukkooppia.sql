@@ -24,6 +24,7 @@ UNION
 SELECT HenkilöID, Etunimi, Sukunimi
 FROM Eläkeläinen2020
 
+
 -- 3. Haetaan vuonna 2020 eläköityneet so leikkaus työntekijä ja eläkeläiset 2020
 USE Joukkooppi
 GO
