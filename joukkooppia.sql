@@ -1,5 +1,7 @@
--- Siirretään työntekijä eläkkeelle
+-- Skriptejä joukko-opillisten operaatioiden testaamiseen
 
+
+-- 1. Siirretään työntekijä eläkkeelle
 -- Varmistetaan, että skripti suoritetaan oikeassa tietokannassa
 USE Joukkooppi
 GO
@@ -12,7 +14,7 @@ FROM Työntekijä2020
 WHERE HenkilöID IN (5,6))
 
 
--- Haetaan työntekijät ja eläkeläiset vuodelta 2020 (ei duplikaatteja)
+-- 2. Haetaan työntekijät ja eläkeläiset vuodelta 2020 (ei duplikaatteja)
 USE Joukkooppi
 GO
 
@@ -22,7 +24,7 @@ UNION
 SELECT HenkilöID, Etunimi, Sukunimi
 FROM Eläkeläinen2020
 
--- Haetaan vuonna 2020 eläköityneet so leikkaus työntekijä ja eläkeläiset 2020
+-- 3. Haetaan vuonna 2020 eläköityneet so leikkaus työntekijä ja eläkeläiset 2020
 USE Joukkooppi
 GO
 
