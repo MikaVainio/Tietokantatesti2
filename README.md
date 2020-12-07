@@ -21,3 +21,9 @@ Rakenna edellisen harjoituksen tietokantaan näkymät:
 Luo proseduuri ja C#-koodi seuraaviin tarkoituksiin
 1. Lisätään tarkastuskäynti
 2. Katsotaan omat tarkastuskäynnit
+
+## Harjoitus 5
+1. Luo AD-hakemistoon käyttäjätunnukset Lasse Luotettava ja Esko Epäluotettava
+2. Luo ryhmä tehokäyttäjät ja liitä Lasse ryhmään tehokäyttäjät
+3. Luo login Lasselle ja Eskolle
+4. Luo user em. käyttäjille
