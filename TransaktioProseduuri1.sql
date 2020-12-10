@@ -18,7 +18,7 @@ BEGIN
 
 -- KAKSIVAIHEINEN ELÄKESIIRTO
 	BEGIN TRANSACTION Eläkesiirto
-	-- Lisästään työntekijä, jonka id on 7 eläkeläisiin
+	-- Lisästään työntekijä, jonka id on annettu parametrinä, eläkeläisiin
 		INSERT dbo.Eläkeläinen2020 (HenkilöID, Etunimi, Sukunimi)
 		(SELECT HenkilöID, Etunimi, Sukunimi
 		FROM dbo.Työntekijä2020
