@@ -1,14 +1,14 @@
--- Proseduuri, jonka avulla luodaan taulu dynaamisia SQL-kometoja k‰ytt‰en
+-- Proseduuri, jonka avulla luodaan taulu dynaamisia SQL-kometoja k√§ytt√§en
 USE Tivi20OAesimerkit
 GO
 
--- Proseduurin m‰‰rittely
+-- Proseduurin m√§√§rittely
 CREATE PROCEDURE sp_luo_vuositaulu
-	-- Muuttuja taulun nime‰ varten
+	-- Muuttuja taulun nime√§ varten
 	@taulu NVARCHAR(50)
 AS
 BEGIN
-	-- M‰‰ritell‰‰n muuttuja, johon SQL-lauseet tallennetaan
+	-- M√§√§ritell√§√§n muuttuja, johon SQL-lauseet tallennetaan
 	-- ja annetaan sen arvoksi taulun luontikomento merkkijonona
 	DECLARE @sqlkomento NVARCHAR(MAX) = '
 	BEGIN
@@ -17,7 +17,7 @@ BEGIN
 		TyomaaID INT)
 	END'
 
-	-- Suoritetaan muuttujaan tallennettut SQL-lauseet, huom. sulkeet
+	-- Suoritetaan muuttujaan tallennettut SQL-lauseet, huom. sulkeet (ilman sulkeita suorittaa vain proseduureja)
 	EXECUTE(@sqlkomento)
 
 END
